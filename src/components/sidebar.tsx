@@ -42,10 +42,10 @@ export default function Sidebar() {
                 <Image
                     height={10}
                     width={10}
-                    src="/IA-2.jpg" 
+                    src="/yo.jpg" 
                     alt="" className="w-10 border-2 h-10 text-blue-700 m-auto rounded-full object-cover lg:w-28 lg:h-28"
                 />
-                  <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">Cynthia J. Watts</h5>
+                  <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">Juan Lizarraga</h5>
                   <span className="hidden text-gray-400 lg:block">Admin</span>
               </div>
               

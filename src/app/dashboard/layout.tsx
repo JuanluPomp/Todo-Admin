@@ -2,6 +2,9 @@
 import Sidebar from '@/components/sidebar';
 import TopMenu from '@/components/top-menu';
 import { CiBellOn, CiBookmarkCheck, CiChat1, CiLogout, CiMenuBurger, CiSearch } from 'react-icons/ci';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function DashboardLayout({
   children
@@ -10,17 +13,17 @@ export default function DashboardLayout({
 }) {
   return (
     <>
-      <Sidebar/>
-        <main>
+      <Sidebar />
+      <main>
         <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%] min-h-screen">
-        <TopMenu/>
-        {/* TODO: Contenido en el Layout.tsx */}
-        <div className="px-6 pt-6">
-          {children}
-        {/* TODO: Fin del contenido en el Layout.tsx */}
+          <TopMenu />
+          {/* TODO: Contenido en el Layout.tsx */}
+          <div className="px-6 pt-6">
+            {children}
+          </div>
         </div>
-      </div>
-        </main>
+      </main>
+      <ToastContainer />
     </>
   );
 }

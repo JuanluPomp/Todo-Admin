@@ -5,8 +5,8 @@ import { z } from "zod"
 export async function GET (request: NextRequest){
     try {
         const {searchParams} = new URL(request.url)
-        const take = searchParams.get('take')!
-        const skip = searchParams.get('skip')!
+        const take = searchParams.get('take') ?? 5
+        const skip = searchParams.get('skip') ?? 0
         if(isNaN(+take)){
             return NextResponse.json({
                 mesage: 'El dato take debe ser un numero', status: '400'
@@ -21,11 +21,11 @@ export async function GET (request: NextRequest){
             take: +take,
             skip: +skip,
             orderBy: {
-                createdAt: 'asc'
+                id: 'desc'
             }
         })
 
-        return NextResponse.json({message: 'Task founded', tasks})
+        return NextResponse.json(tasks)
     } catch (error) {
         console.log(error)
         return NextResponse.json({error: error instanceof Error ? error.message: 'No se encontraron tareas'})
@@ -33,7 +33,7 @@ export async function GET (request: NextRequest){
 }
 
 export const TodoSchema = z.object({
-    description: z.string().min(1, 'La descripcion es obligatoria'),
+    description: z.string().optional(),
     status: z.boolean().optional()
 })
 
@@ -47,7 +47,7 @@ export async function POST(request: NextRequest){
 
         const task = await prisma.todo.create({
             data: {
-                description: data.data.description
+                description: data.data.description!
             }
         })
         return NextResponse.json({
