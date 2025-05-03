@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { createTodo } from "../helpers/create-todo";
 import { promise } from "zod";
 import { resolve } from "path";
+import { addTodo, deleteComletedTodos } from "../actions/todo-actions";
 
 const sleep = (seconds: number = 0): Promise<boolean> => {
   return new Promise((resolve) => {
@@ -22,36 +23,27 @@ export const NewTodo =  () => {
     const [description, setDescription] = useState('')
     const handleCreateTodo = async (e: FormEvent<HTMLFormElement>)  => {
         e.preventDefault()
-        const res = await createTodo(description)
-        if(res.status === 201){
+        const res = await addTodo(description)
+        if(res.status !== 201){
           toast.error(res.message)
           return
         }
-        console.log(res)
         toast.success(res.message)
-        router.refresh()
         setDescription('')
     }
     const handleDeleteComletedTodos = async () => {
 
-      const res = await fetch('/api/tasks/delete-completes',{
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then(res => res.json())
-      console.log(res.message)
-      if(res.status === 500){
+      const res = await deleteComletedTodos()
+      if(res.status !== 200){
         toast.warn(res.message)
         return
       }
       toast.success(res.message)
-      router.refresh()
     }
   return (
     <form  className='flex w-full' onSubmit={(e) => handleCreateTodo(e)}>
       <input type="text"
-        className="w-6/12 -ml-10 pl-3 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-sky-500 transition-all"
+        className="w-6/12 bg-white -ml-10 pl-3 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-sky-500 transition-all"
         placeholder="Agregue aqui un nuevo todo"
         value={description}
         onChange={(e) => setDescription(e.target.value)}/>

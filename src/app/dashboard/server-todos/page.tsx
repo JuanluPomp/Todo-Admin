@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 import { NewTodo } from '@/app/features/todos/components/new-todo'
 import TodosGrid from '@/app/features/todos/components/todos-grid'
 import prisma from '@/lib/prisma'
@@ -10,7 +13,7 @@ export default async function ServerTodos() {
         }
       })
   return (
-    <div className=' container mx-auto'>
+    <div className=' container mx-auto border-2 border-slate-300 p-4 rounded-md bg-slate-100 shadow-2xl'>
           <h1 className=' text-center text-3xl font-bold'>Rest Todos Page</h1>
           <div className=' flex justify-center items-center mx-5 p-10'>
             <NewTodo/>

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import SidebarItem from './sidebar-item'
 import { CiLogout } from 'react-icons/ci'
-import { IoCalendarOutline, IoCheckboxOutline, IoListOutline } from 'react-icons/io5'
+import { IoCalendarOutline, IoCheckboxOutline, IoCodeWorkingOutline, IoListOutline } from 'react-icons/io5'
 
 const menuItem = [
   {
@@ -20,6 +20,11 @@ const menuItem = [
     icon: <IoListOutline/>,
     title: 'Server Actions',
     pathNaame: '/dashboard/server-todos'
+  },
+  {
+    icon: <IoCodeWorkingOutline/>,
+    title: 'Cookies',
+    pathNaame: '/dashboard/cookies'
   },
 ]
 export default function Sidebar() {
